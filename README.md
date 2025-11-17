@@ -59,11 +59,8 @@ pip install pandas numpy scikit-learn lightgbm matplotlib seaborn joblib imbalan
 ### Run the Model
 
 ```bash
-# Run best optimized model
+# Run the fraud detection model
 python fraud_detection_best.py
-
-# Run with visualizations
-python fraud_detection_scientific.py
 ```
 
 ## 📈 Performance Results
@@ -89,16 +86,12 @@ python fraud_detection_scientific.py
 
 ```
 Credit_Fraud/
-├── fraud_detection_best.py          # Best model (RECOMMENDED)
-├── fraud_detection_scientific.py    # Model with visualizations
-├── fraud_detection_production.py    # Behavioral features experiment
-├── fraud_detection_final.py         # Ensemble approach
-├── predict_optimized.py             # Prediction script
+├── fraud_detection_best.py         # Main fraud detection model (~80 lines)
+├── fraud_detection_results.png     # 6-panel visualization dashboard
 ├── fraud_model_best.pkl            # Trained model
 ├── scaler_best.pkl                 # Feature scaler
 ├── metadata_best.pkl               # Model metadata
 ├── SETUP_GUIDE.md                  # Setup instructions
-├── HONEST_ASSESSMENT.md            # Detailed analysis
 ├── README.md                       # This file
 ├── creditcard.csv                  # Dataset (download separately)
 └── .venv/                          # Virtual environment
@@ -200,18 +193,22 @@ print(f"Total transactions: {len(new_data)}")
 print(f"Flagged as fraud: {predictions.sum()} ({predictions.sum()/len(new_data)*100:.2f}%)")
 ```
 
-## 📊 Visualizations
+## 📊 Model Output
 
-Run `fraud_detection_scientific.py` to generate:
+The streamlined `fraud_detection_best.py` script (~80 lines) provides:
 
-1. **Precision-Recall Curve** - Primary performance visualization
-2. **ROC Curve** - Traditional metric (less useful here)
-3. **Confusion Matrix** - Classification breakdown
-4. **Feature Importance** - Top 20 predictive features
-5. **Threshold Analysis** - F1/Precision/Recall trade-offs
-6. **Business Impact** - Cost-benefit analysis
+1. **Cross-Validation Results** - 5-fold stratified CV (PR-AUC: 0.45 ± 0.09)
+2. **Test Set Performance** - Concise metrics summary
+3. **6-Panel Visualization Dashboard** (`fraud_detection_results.png`):
+   - Precision-Recall Curve (primary metric)
+   - ROC Curve
+   - Confusion Matrix with threshold
+   - Top 20 Feature Importances
+   - Threshold Optimization (F1/Precision/Recall trade-offs)
+   - Business Impact Analysis (cost-benefit)
+4. **Saved Model Files** - fraud_model_best.pkl, scaler_best.pkl, metadata_best.pkl
 
-Output: `scientific_fraud_detection_results.png`
+**Code Efficiency:** Reduced from 200+ lines to ~80 lines while adding comprehensive visualizations
 
 ## 🎯 Model Evaluation Metrics
 

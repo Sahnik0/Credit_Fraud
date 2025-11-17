@@ -51,19 +51,24 @@ python fraud_detection_best.py
 - `scaler_best.pkl` - Feature scaler
 - `metadata_best.pkl` - Model metadata
 
-## Alternative Scripts
+## Model Output
 
-### Scientific Approach (with visualizations)
-```powershell
-python fraud_detection_scientific.py
-```
-Outputs: `scientific_fraud_detection_results.png`
+The streamlined script outputs:
+- Cross-validation: PR-AUC 0.45 ± 0.09 (5-fold CV)
+- Test metrics: PR-AUC 0.62 | Precision 0.82 | Recall 0.74 | F1 0.78
+- Confusion matrix: TP: 80 | FP: 18 | FN: 28 | TN: 85,317
+- **Visualization:** `fraud_detection_results.png` (6-panel dashboard)
+- Model files: fraud_model_best.pkl, scaler_best.pkl, metadata_best.pkl
 
-### Production Approach (behavioral features)
-```powershell
-python fraud_detection_production.py
-```
-Outputs: `production_fraud_detection_results.png`
+### Visualization Dashboard
+
+The generated `fraud_detection_results.png` includes:
+1. **Precision-Recall Curve** - Shows PR-AUC of 0.62
+2. **ROC Curve** - Shows ROC-AUC of 0.92
+3. **Confusion Matrix** - Visual breakdown with optimal threshold
+4. **Feature Importance** - Top 20 most predictive features
+5. **Threshold Analysis** - F1/Precision/Recall optimization
+6. **Business Impact** - Financial cost-benefit analysis
 
 ## Make Predictions
 
@@ -133,23 +138,25 @@ python -m venv .venv
 ```
 Credit_Fraud/
 ├── creditcard.csv                          # Dataset
-├── fraud_detection_best.py                 # Best model (recommended)
-├── fraud_detection_scientific.py           # With visualizations
-├── fraud_detection_production.py           # Behavioral features attempt
+├── fraud_detection_best.py                 # Fraud detection model (~80 lines)
+├── fraud_detection_results.png             # 6-panel visualization dashboard
 ├── fraud_model_best.pkl                    # Trained model
 ├── scaler_best.pkl                         # Feature scaler
 ├── metadata_best.pkl                       # Model metadata
-├── HONEST_ASSESSMENT.md                    # Detailed analysis
+├── SETUP_GUIDE.md                          # This file
+├── README.md                               # Project documentation
 └── .venv/                                  # Virtual environment
 ```
 
 ## Key Takeaways
 
-1. **Use `fraud_detection_best.py`** for best performance
-2. **Expected PR-AUC: 0.45-0.62** (this is the dataset ceiling)
-3. **NO SMOTE** - uses class weights for imbalance
-4. **30 features only** - Time, Amount, V1-V28 (original PCA features)
-5. **Cross-validated** - honest performance estimation
+1. **Expected PR-AUC: 0.45-0.62** - This is the authentic ceiling for this dataset
+2. **Cross-validated PR-AUC: 0.45 ± 0.09** - Honest performance estimate across 5 folds
+3. **Test PR-AUC: 0.62** - Test set performance (can be luckier than CV)
+4. **NO SMOTE** - Uses class weights for imbalance handling
+5. **30 features only** - Time, Amount, V1-V28 (original PCA features)
+6. **74% fraud detection rate** - Catches 3 out of 4 fraudulent transactions
+7. **0.02% false alarm rate** - Only 2 false alarms per 10,000 transactions
 
 ## To Achieve PR-AUC > 0.90
 
